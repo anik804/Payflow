@@ -11,62 +11,64 @@ export default function About() {
     {
       icon: Award,
       title: "Excellence",
-      description: "We strive for excellence in service delivery and innovation."
+      description: "We strive for excellence in every service, ensuring reliability and innovation."
     },
     {
       icon: Users,
       title: "Inclusivity",
-      description: "Financial services accessible to everyone, everywhere."
+      description: "Bringing digital finance closer to everyone — no matter where they are."
     },
     {
       icon: TrendingUp,
       title: "Growth",
-      description: "Continuous improvement and expansion of our services."
+      description: "Constantly evolving with technology to provide better financial empowerment."
     }
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="gradient-hero py-20">
+      <section className="bg-gradient-to-r from-green-500 via-emerald-500 to-purple-600 min-h-[80vh] flex items-center text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center text-white">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">About PayFlow</h1>
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
+              About PayFlow
+            </h1>
             <p className="text-lg text-white/90">
-              Revolutionizing digital payments and making financial services accessible to everyone
+              Empowering millions with a smarter, faster, and more secure way to manage money.
             </p>
           </div>
         </div>
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-t from-purple-50 via-white to-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2">
+            <Card className="border-2 border-green-200 hover:border-green-500 transition-all duration-300 shadow-sm hover:shadow-lg">
               <CardHeader>
-                <div className="flex items-center justify-center w-12 h-12 rounded-lg gradient-primary mb-4">
-                  <Target className="h-6 w-6 text-white" />
+                <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 mb-4 shadow-md">
+                  <Target className="h-7 w-7 text-white" />
                 </div>
-                <CardTitle className="text-2xl">Our Mission</CardTitle>
+                <CardTitle className="text-2xl text-green-800">Our Mission</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">
-                  To empower individuals and businesses with seamless, secure, and accessible digital payment solutions that transform the way people manage their finances.
+                <CardDescription className="text-base text-gray-600">
+                  To empower individuals and businesses with seamless, secure, and accessible digital payment solutions that transform how people manage their finances.
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card className="border-2">
+            <Card className="border-2 border-purple-200 hover:border-purple-500 transition-all duration-300 shadow-sm hover:shadow-lg">
               <CardHeader>
-                <div className="flex items-center justify-center w-12 h-12 rounded-lg gradient-secondary mb-4">
-                  <Eye className="h-6 w-6 text-white" />
+                <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 mb-4 shadow-md">
+                  <Eye className="h-7 w-7 text-white" />
                 </div>
-                <CardTitle className="text-2xl">Our Vision</CardTitle>
+                <CardTitle className="text-2xl text-purple-800">Our Vision</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">
-                  To become the world's most trusted and innovative digital wallet platform, enabling financial inclusion and prosperity for all.
+                <CardDescription className="text-base text-gray-600">
+                  To become the world’s most trusted digital wallet — enabling secure, inclusive, and borderless financial freedom for all.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -75,41 +77,48 @@ export default function About() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-gradient-to-b from-green-50 via-white to-purple-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-center">Our Story</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <h2 className="text-3xl font-bold mb-6 text-center text-purple-900">
+              Our Story
+            </h2>
+            <div className="space-y-5 text-gray-700 leading-relaxed">
               <p>
-                Founded in 2020, PayFlow was born from a simple idea: making digital payments accessible to everyone, regardless of their technical expertise or financial background.
+                Founded in 2020, <span className="font-semibold text-green-600">PayFlow</span> was born from a simple idea — making digital payments easy, secure, and available to everyone.
               </p>
               <p>
-                What started as a small startup with a handful of passionate individuals has grown into a platform serving over 5 million users across the country. Our journey has been marked by continuous innovation, unwavering commitment to security, and a deep understanding of our users' needs.
+                From a small startup with a few passionate innovators, we’ve grown into a trusted platform serving over <span className="font-semibold text-purple-700">5 million users</span> nationwide. Our focus has always been innovation, reliability, and user trust.
               </p>
               <p>
-                Today, PayFlow stands as a testament to what's possible when technology meets purpose. We've processed over $2 billion in transactions, partnered with 50,000+ agent locations, and continue to expand our services to reach even more people.
+                Today, PayFlow stands at the intersection of technology and financial empowerment, processing over <span className="font-semibold text-green-600">$2 billion</span> in transactions and partnering with more than 50,000 agents across the country.
               </p>
               <p>
-                But we're not stopping here. Our vision extends beyond just payments – we're building a comprehensive financial ecosystem that empowers people to achieve their financial goals, from everyday transactions to long-term wealth building.
+                As we look forward, our mission remains the same — to build a full digital financial ecosystem that helps users achieve their financial goals with confidence.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-20">
+      {/* Core Values */}
+      <section className="py-20 bg-gradient-to-r from-purple-50 via-white to-green-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-12 text-center">Our Core Values</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center text-purple-900">
+            Our Core Values
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <Card key={index} className="text-center hover:border-primary/50 transition-all">
+              <Card
+                key={index}
+                className="text-center border-2 border-transparent hover:border-green-400 transition-all hover:shadow-lg"
+              >
                 <CardHeader>
-                  <div className="flex items-center justify-center w-12 h-12 rounded-lg gradient-primary mx-auto mb-4">
-                    <value.icon className="h-6 w-6 text-white" />
+                  <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r from-green-500 to-purple-500 mx-auto mb-4 shadow-md">
+                    <value.icon className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle className="text-xl">{value.title}</CardTitle>
-                  <CardDescription>{value.description}</CardDescription>
+                  <CardTitle className="text-lg text-gray-800">{value.title}</CardTitle>
+                  <CardDescription className="text-gray-600">{value.description}</CardDescription>
                 </CardHeader>
               </Card>
             ))}
@@ -118,15 +127,15 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Our Team</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              We're a diverse team of designers, engineers, financial experts, and customer service professionals united by a common goal: making financial services better for everyone.
+      <section className="py-20 bg-gradient-to-t from-green-100 via-white to-purple-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-6 text-purple-900">Our Team</h2>
+            <p className="text-lg text-gray-700 mb-8">
+              We’re a passionate team of innovators, engineers, and financial experts building the future of payments.
             </p>
-            <p className="text-muted-foreground">
-              With backgrounds spanning fintech, banking, technology, and user experience design, our team brings together decades of combined experience to create a platform that's both powerful and easy to use.
+            <p className="text-gray-600">
+              Our combined experience across fintech, banking, and design enables us to create powerful yet simple solutions that redefine digital transactions.
             </p>
           </div>
         </div>

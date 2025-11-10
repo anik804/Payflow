@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,20 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import {
-  Wallet,
-  Shield,
-  Zap,
-  Users,
-  ArrowRight,
-  Lock,
-  Smartphone,
-  CreditCard,
-  TrendingUp,
-} from "lucide-react";
 import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CreditCard,
+  Lock,
+  Shield,
+  Smartphone,
+  TrendingUp,
+  Users,
+  Wallet,
+  Zap,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const features = [
@@ -71,7 +69,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      {/* <Navbar /> */}
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-purple-100 via-purple-200 to-purple-100 py-20 lg:py-32">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
@@ -371,7 +369,7 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
