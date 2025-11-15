@@ -1,145 +1,258 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Heart, Award, Users, TrendingUp } from "lucide-react";
+"use client";
 
-export default function About() {
-  const values = [
-    {
-      icon: Heart,
-      title: "Customer First",
-      description: "We prioritize user experience and satisfaction in everything we do."
-    },
-    {
-      icon: Award,
-      title: "Excellence",
-      description: "We strive for excellence in every service, ensuring reliability and innovation."
-    },
-    {
-      icon: Users,
-      title: "Inclusivity",
-      description: "Bringing digital finance closer to everyone — no matter where they are."
-    },
-    {
-      icon: TrendingUp,
-      title: "Growth",
-      description: "Constantly evolving with technology to provide better financial empowerment."
-    }
-  ];
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
+interface About3Props {
+  title?: string;
+  description?: string;
+  mainImage?: { src: string; alt: string };
+  secondaryImage?: { src: string; alt: string };
+  breakout?: {
+    src: string;
+    alt: string;
+    title?: string;
+    description?: string;
+    buttonText?: string;
+    buttonUrl?: string;
+  };
+  companiesTitle?: string;
+  companies?: Array<{ src: string; alt: string }>;
+  achievementsTitle?: string;
+  achievementsDescription?: string;
+  achievements?: Array<{ label: string; value: string }>;
+}
+
+const defaultCompanies = [
+  {
+    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-1.svg",
+    alt: "SecurePay",
+  },
+  {
+    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-2.svg",
+    alt: "FastMoney",
+  },
+  {
+    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-3.svg",
+    alt: "GlobalTransfer",
+  },
+  {
+    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-4.svg",
+    alt: "QuickCash",
+  },
+  {
+    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-5.svg",
+    alt: "WalletPlus",
+  },
+  {
+    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/company/fictional-company-logo-6.svg",
+    alt: "FinTech Hub",
+  },
+];
+
+const defaultAchievements = [
+  { label: "Active Users", value: "3M+" },
+  { label: "Total Transactions", value: "80M+" },
+  { label: "Value Transferred", value: "$5B+" },
+  { label: "Agents Supported", value: "10K+" },
+];
+
+export default function About({
+  title = "Your Trusted Digital Financial Partner",
+  description = "We are a team of fintech innovators dedicated to simplifying digital payments and empowering financial inclusion. Our secure and intuitive platform provides you with the tools to manage your money instantly and effortlessly.",
+  mainImage = {
+    src: "https://i.ibb.co.com/0pth1F8H/10780345-19198982.jpg",
+    alt: "Digital wallet dashboard on a phone",
+  },
+  secondaryImage = {
+    src: "https://i.ibb.co.com/nV2wR7y/3d-cryptocurrency-rendering-design.jpg",
+    alt: "Money flowing into a digital wallet",
+  },
+  breakout = {
+    src: "https://i.ibb.co.com/VFsdvxF/logoipsum-363.png",
+    alt: "Security shield icon",
+    title: "Secure and Instant Transactions",
+    description:
+      "Our platform is built with industry-leading security protocols to ensure every transaction is protected and your funds are always safe.",
+    buttonText: "Learn about security",
+    buttonUrl: "/about",
+  },
+  companiesTitle = "Partnered with trusted financial institutions",
+  companies = defaultCompanies,
+  achievementsTitle = "Our Impact in Numbers",
+  achievementsDescription = "Driving the future of digital finance by providing a reliable and accessible platform for millions of users and agents.",
+  achievements = defaultAchievements,
+}: About3Props = {}) {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-500 via-emerald-500 to-purple-600 min-h-[80vh] flex items-center text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              About PayFlow
-            </h1>
-            <p className="text-lg text-white/90">
-              Empowering millions with a smarter, faster, and more secure way to manage money.
-            </p>
+    <section className="py-32 w-11/12 mx-auto">
+      <div className="container">
+        {/* Heading Section */}
+        <motion.div
+          className="mb-14 grid gap-5 text-center md:grid-cols-2 md:text-left"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <motion.h1
+            className="text-5xl font-semibold"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            {title}
+          </motion.h1>
+
+          <motion.p
+            className="text-muted-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            {description}
+          </motion.p>
+        </motion.div>
+
+        {/* Images + Breakout Card */}
+        <div className="grid gap-7 lg:grid-cols-3">
+          {/* Main Image */}
+          <motion.img
+            src={mainImage.src}
+            alt={mainImage.alt}
+            className="size-full max-h-[620px] rounded-xl object-cover lg:col-span-2"
+            initial={{ opacity: 0, scale: 0.92 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          />
+
+          <div className="flex flex-col gap-7 md:flex-row lg:flex-col">
+            {/* Breakout Card */}
+            <motion.div
+              className="flex flex-col justify-between gap-6 rounded-xl bg-muted p-7 md:w-1/2 lg:w-auto"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src={breakout.src}
+                alt={breakout.alt}
+                className="mr-auto h-12"
+              />
+
+              <div>
+                <p className="mb-2 text-lg font-semibold">{breakout.title}</p>
+                <p className="text-muted-foreground">{breakout.description}</p>
+              </div>
+
+              <Button variant="outline" className="mr-auto" asChild>
+                <a href={breakout.buttonUrl} target="_blank">
+                  {breakout.buttonText}
+                </a>
+              </Button>
+            </motion.div>
+
+            {/* Secondary Image */}
+            <motion.img
+              src={secondaryImage.src}
+              alt={secondaryImage.alt}
+              className="grow basis-0 rounded-xl object-cover md:w-1/2 lg:min-h-0 lg:w-auto"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
           </div>
         </div>
-      </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 bg-gradient-to-t from-purple-50 via-white to-green-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 border-green-200 hover:border-green-500 transition-all duration-300 shadow-sm hover:shadow-lg">
-              <CardHeader>
-                <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 mb-4 shadow-md">
-                  <Target className="h-7 w-7 text-white" />
-                </div>
-                <CardTitle className="text-2xl text-green-800">Our Mission</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base text-gray-600">
-                  To empower individuals and businesses with seamless, secure, and accessible digital payment solutions that transform how people manage their finances.
-                </CardDescription>
-              </CardContent>
-            </Card>
+        {/* Companies Section */}
+        <motion.div
+          className="py-32"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-center">{companiesTitle}</p>
 
-            <Card className="border-2 border-purple-200 hover:border-purple-500 transition-all duration-300 shadow-sm hover:shadow-lg">
-              <CardHeader>
-                <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 mb-4 shadow-md">
-                  <Eye className="h-7 w-7 text-white" />
-                </div>
-                <CardTitle className="text-2xl text-purple-800">Our Vision</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base text-gray-600">
-                  To become the world’s most trusted digital wallet — enabling secure, inclusive, and borderless financial freedom for all.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="py-20 bg-gradient-to-b from-green-50 via-white to-purple-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-center text-purple-900">
-              Our Story
-            </h2>
-            <div className="space-y-5 text-gray-700 leading-relaxed">
-              <p>
-                Founded in 2020, <span className="font-semibold text-green-600">PayFlow</span> was born from a simple idea — making digital payments easy, secure, and available to everyone.
-              </p>
-              <p>
-                From a small startup with a few passionate innovators, we’ve grown into a trusted platform serving over <span className="font-semibold text-purple-700">5 million users</span> nationwide. Our focus has always been innovation, reliability, and user trust.
-              </p>
-              <p>
-                Today, PayFlow stands at the intersection of technology and financial empowerment, processing over <span className="font-semibold text-green-600">$2 billion</span> in transactions and partnering with more than 50,000 agents across the country.
-              </p>
-              <p>
-                As we look forward, our mission remains the same — to build a full digital financial ecosystem that helps users achieve their financial goals with confidence.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Values */}
-      <section className="py-20 bg-gradient-to-r from-purple-50 via-white to-green-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-12 text-center text-purple-900">
-            Our Core Values
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <Card
-                key={index}
-                className="text-center border-2 border-transparent hover:border-green-400 transition-all hover:shadow-lg"
+          <motion.div
+            className="mt-8 flex flex-wrap justify-center gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.1 },
+              },
+            }}
+          >
+            {companies.map((company, idx) => (
+              <motion.div
+                key={company.src + idx}
+                className="flex items-center gap-3"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
               >
-                <CardHeader>
-                  <div className="flex items-center justify-center w-14 h-14 rounded-lg bg-gradient-to-r from-green-500 to-purple-500 mx-auto mb-4 shadow-md">
-                    <value.icon className="h-7 w-7 text-white" />
-                  </div>
-                  <CardTitle className="text-lg text-gray-800">{value.title}</CardTitle>
-                  <CardDescription className="text-gray-600">{value.description}</CardDescription>
-                </CardHeader>
-              </Card>
+                <img
+                  src={company.src}
+                  alt={company.alt}
+                  className="h-6 w-auto md:h-8"
+                />
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </motion.div>
 
-      {/* Team Section */}
-      <section className="py-20 bg-gradient-to-t from-green-100 via-white to-purple-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-purple-900">Our Team</h2>
-            <p className="text-lg text-gray-700 mb-8">
-              We’re a passionate team of innovators, engineers, and financial experts building the future of payments.
-            </p>
-            <p className="text-gray-600">
-              Our combined experience across fintech, banking, and design enables us to create powerful yet simple solutions that redefine digital transactions.
+        {/* Achievements Section */}
+        <motion.div
+          className="relative overflow-hidden rounded-xl bg-muted p-10 md:p-16"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col gap-4 text-center md:text-left">
+            <h2 className="text-4xl font-semibold">{achievementsTitle}</h2>
+            <p className="max-w-xl text-muted-foreground">
+              {achievementsDescription}
             </p>
           </div>
-        </div>
-      </section>
-    </div>
+
+          {/* Stats */}
+          <motion.div
+            className="mt-10 flex flex-wrap justify-between gap-10 text-center"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.12 } },
+            }}
+          >
+            {achievements.map((item, idx) => (
+              <motion.div
+                key={item.label + idx}
+                className="flex flex-col gap-4"
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  show: { opacity: 1, y: 0 },
+                }}
+              >
+                <p>{item.label}</p>
+                <span className="text-4xl font-semibold md:text-5xl">
+                  {item.value}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="pointer-events-none absolute -top-1 right-1 z-10 hidden h-full w-full bg-[linear-gradient(to_right,hsl(var(--muted-foreground))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--muted-foreground))_1px,transparent_1px)] [mask-image:linear-gradient(to_bottom_right,#000,transparent,transparent)] bg-[size:80px_80px] opacity-15 md:block"></div>
+        </motion.div>
+      </div>
+    </section>
   );
 }

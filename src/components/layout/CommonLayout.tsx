@@ -1,15 +1,16 @@
-import { Outlet } from 'react-router';
-import { Footer } from '../shared/Footer';
-import { Navbar } from '../shared/Navbar';
+import type { ReactNode } from "react";
+import Footer from "../shared/Footer";
+import Navbar from "../shared/Navbar";
 
-const CommonLayout = () => {
+interface IProps {
+  children: ReactNode;
+}
+export default function CommonLayout({ children }: IProps) {
   return (
-    <div>
-      <Navbar></Navbar>
-      <Outlet></Outlet>
-      <Footer></Footer>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <div className="grow-1">{children}</div>
+      <Footer />
     </div>
   );
-};
-
-export default CommonLayout;
+}

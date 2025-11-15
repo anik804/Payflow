@@ -1,109 +1,113 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Logo from "@/assets/icons/Logo";
 import { Button } from "@/components/ui/button";
-import { Wallet, Menu } from "lucide-react";
-import { useState } from "react";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+
+import { Link, useNavigate } from "react-router";
+import {
+  authApi,
+  useLogoutMutation,
+  useUserInfoQuery,
+} from "@/redux/features/auth/auth.api";
+import { useAppDispatch } from "@/redux/hook";
+import { ModeToggle } from "../layout/ModeToggle";
+import { role } from "@/constant/role";
+
 import { motion } from "framer-motion";
 
-export const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const navigationLinks = [
+  { href: "/", label: "Home", role: "PUBLIC" },
+  { href: "/feature", label: "Feature", role: "PUBLIC" },
+  { href: "/contact", label: "Contact", role: "PUBLIC" },
+  { href: "/about", label: "About", role: "PUBLIC" },
+  { href: "/faq", label: "FAQ", role: "PUBLIC" },
+  { href: "/admin", label: "Dashboard", role: role.admin },
+  { href: "/agent", label: "Dashboard", role: role.agent },
+  { href: "/user", label: "Dashboard", role: role.user },
+];
+
+export default function Navbar() {
+  const { data } = useUserInfoQuery(undefined);
+  const [logout] = useLogoutMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout(undefined);
+    dispatch(authApi.util.resetApiState());
+    navigate("/");
+  };
+
+  // Filter links based on role
+  const filteredLinks = navigationLinks.filter(
+    (l) => l.role === "PUBLIC" || l.role === data?.data?.role
+  );
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-purple-100/95 backdrop-blur supports-[backdrop-filter]:bg-purple-100/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo with animation */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <motion.div
-              initial={{ rotate: -15, opacity: 0, scale: 0.8 }}
-              animate={{ rotate: 0, opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-green-400 to-green-600 shadow-md group-hover:shadow-lg transition-shadow"
-            >
-              <Wallet className="h-6 w-6 text-white" />
-            </motion.div>
-
-            <motion.span
-              initial={{ x: -10, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
-              whileHover={{ scale: 1.1 }}
-              className="text-xl font-bold bg-gradient-to-r from-green-600 to-purple-700 bg-clip-text text-transparent"
-            >
-              PayFlow
-            </motion.span>
+    <motion.header
+      initial={{ opacity: 0, y: -15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="nav-menu border-b backdrop-blur-md bg-background/70 sticky top-0 z-50"
+    >
+      <div className="container mx-auto px-4 flex h-16 items-center justify-between gap-4">
+        {/* Left side - Logo */}
+        <div className="flex items-center gap-6">
+          <Link to="/" className="text-primary hover:text-primary/90">
+            <Logo />
           </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            {["Home", "About", "Features", "Pricing", "Contact"].map((item) => (
-              <Link
-                key={item}
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                className="relative text-foreground hover:text-purple-700 font-medium transition-all duration-200 after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-purple-600 after:left-0 after:-bottom-1 hover:after:w-full after:transition-all"
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link to="/login">
-              <Button variant="ghost" className="hover:scale-105 transition-transform">
-                Login
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="accent" className="hover:scale-105 transition-transform">
-                Get Started
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-md hover:bg-purple-200 transition"
-          >
-            <Menu className="h-6 w-6 text-purple-800" />
-          </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden py-4 space-y-3 border-t animate-slide-up"
-          >
-            {["Home", "About", "Features", "Pricing", "Contact"].map((item) => (
-              <Link
-                key={item}
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                className="block py-2 text-foreground hover:text-purple-700 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item}
-              </Link>
+        {/* CENTER NAVIGATION */}
+        <NavigationMenu className="max-md:hidden flex-1">
+          <NavigationMenuList className="flex justify-center gap-6">
+            {filteredLinks.map((link, index) => (
+              <NavigationMenuItem key={index}>
+                <NavigationMenuLink asChild>
+                  <motion.div
+                    whileHover={{ scale: 1.07 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="relative cursor-pointer font-medium text-muted-foreground hover:text-primary"
+                  >
+                    <Link to={link.href} className="py-1.5">
+                      {link.label}
+                    </Link>
+
+                    {/* UNDERLINE ANIMATION */}
+                    <motion.span
+                      className="absolute left-0 bottom-0 h-[2px] w-full bg-primary"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.25 }}
+                    />
+                  </motion.div>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             ))}
-            <div className="flex flex-col gap-2 pt-2">
-              <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full hover:scale-105 transition-transform">
-                  Login
-                </Button>
-              </Link>
-              <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="accent" className="w-full hover:scale-105 transition-transform">
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        )}
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        {/* Right side buttons */}
+        <div className="flex items-center gap-2">
+          <ModeToggle />
+
+          {data?.data?.email ? (
+            <Button onClick={handleLogout} variant="outline" className="text-sm">
+              logout
+            </Button>
+          ) : (
+            <Button asChild className="text-sm">
+              <Link to="/login">login</Link>
+            </Button>
+          )}
+        </div>
       </div>
-    </nav>
+    </motion.header>
   );
-};
+}

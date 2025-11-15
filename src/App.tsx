@@ -1,12 +1,14 @@
-import './App.css'
+import { Outlet } from "react-router";
+import CommonLayout from "./components/layout/CommonLayout";
 
 function App() {
-
   return (
     <>
-      <h1>Vite + React</h1>
+      <CommonLayout>
+        <Outlet />
+      </CommonLayout>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
